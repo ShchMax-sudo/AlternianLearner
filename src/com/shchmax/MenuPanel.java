@@ -2,13 +2,9 @@ package com.shchmax;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel {
     private final Frame parentFrame;
-    private final int BUTTON_WIDTH = 200;
-    private final int BUTTON_HEIGHT = 50;
     private final JButton languageSwitchButton;
     private final JButton easyModeButton;
     private final JButton mediumModeButton;
@@ -43,6 +39,8 @@ public class MenuPanel extends JPanel {
         };
         for (int i = 0; i < buttons.length; ++i) {
             JButton button = buttons[i];
+            int BUTTON_WIDTH = 200;
+            int BUTTON_HEIGHT = 50;
             button.setBounds((Frame.WIDTH - BUTTON_WIDTH) / 2, (Frame.HEIGHT - buttons.length * BUTTON_HEIGHT) / 2 + i * BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT);
             button.setFocusPainted(false);
             this.add(button);
@@ -54,22 +52,18 @@ public class MenuPanel extends JPanel {
         Font buttonEnglishFont = UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.PLAIN, 18);
         if (!parentFrame.isAlternian) {
             languageSwitchButton.setFont(buttonEnglishFont);
-            languageSwitchButton.setText("<html><center>Switch<br>Language</center></html>");
             easyModeButton.setFont(buttonEnglishFont);
-            easyModeButton.setText("Easy");
             mediumModeButton.setFont(buttonEnglishFont);
-            mediumModeButton.setText("Medium");
             hardModeButton.setFont(buttonEnglishFont);
-            hardModeButton.setText("Hard");
         } else {
             languageSwitchButton.setFont(buttonAlternianFont);
-            languageSwitchButton.setText("<html><center>hctiws<br>egaugnal</center></html>");
             easyModeButton.setFont(buttonAlternianFont);
-            easyModeButton.setText("ysae");
             mediumModeButton.setFont(buttonAlternianFont);
-            mediumModeButton.setText("muidem");
             hardModeButton.setFont(buttonAlternianFont);
-            hardModeButton.setText("drah");
         }
+        languageSwitchButton.setText("<html><center>Switch<br>Language</center></html>");
+        easyModeButton.setText("Easy");
+        mediumModeButton.setText("Medium");
+        hardModeButton.setText("Hard");
     }
 }

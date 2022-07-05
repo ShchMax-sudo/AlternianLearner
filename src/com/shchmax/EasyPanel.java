@@ -2,34 +2,25 @@ package com.shchmax;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class EasyPanel extends JPanel {
-    private final Frame parentFrame;
-    private final int MENU_BUTTON_WIDTH = 200;
-    private final int MENU_BUTTON_HEIGHT = 50;
     private final char[] letters = new char[6];
     private int correct;
-    private final JButton menuButton;
-    private final JButton[] answerButtons;
-    private final JLabel questionLabel;
 
     public EasyPanel(Frame parentFrame) {
-        this.parentFrame = parentFrame;
         this.setBounds(0, 0, Frame.WIDTH, Frame.HEIGHT);
         this.setPreferredSize(new Dimension(Frame.WIDTH, Frame.HEIGHT));
         this.setLayout(null);
 
         generateLetters();
 
-        menuButton = new JButton();
-        answerButtons = new JButton[letters.length];
+        JButton menuButton = new JButton();
+        JButton[] answerButtons = new JButton[letters.length];
         for (int i = 0; i < answerButtons.length; ++i) {
             answerButtons[i] = new JButton();
         }
-        questionLabel = new JLabel();
+        JLabel questionLabel = new JLabel();
 
         menuButton.addActionListener(e -> parentFrame.openMenu());
         for (int i = 0; i < answerButtons.length; ++i) {
@@ -46,11 +37,10 @@ public class EasyPanel extends JPanel {
         Font labelAlternianFont = new Font("Alternian", Font.PLAIN, Frame.HEIGHT / 6);
         if (!parentFrame.isAlternian) {
             menuButton.setFont(buttonEnglishFont);
-            menuButton.setText("Menu");
         } else {
             menuButton.setFont(buttonAlternianFont);
-            menuButton.setText("unem");
         }
+        menuButton.setText("Menu");
         for (int i = 0; i < answerButtons.length; ++i) {
             JButton button = answerButtons[i];
             button.setFont(buttonEnglishFont);
@@ -61,6 +51,8 @@ public class EasyPanel extends JPanel {
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
         questionLabel.setVerticalAlignment(JLabel.CENTER);
 
+        int MENU_BUTTON_WIDTH = 200;
+        int MENU_BUTTON_HEIGHT = 50;
         menuButton.setBounds(0, 0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
         menuButton.setFocusPainted(false);
         this.add(menuButton);
@@ -69,8 +61,7 @@ public class EasyPanel extends JPanel {
             int x = i / (answerButtons.length / 2);
             int y = i % (answerButtons.length / 2);
             int width = 200;
-            int height = MENU_BUTTON_HEIGHT;
-            button.setBounds((Frame.WIDTH - (answerButtons.length / 2) * width) / 2 + y * width, Frame.HEIGHT - x * height - (Frame.WIDTH - (answerButtons.length / 2) * width) / 2, width, height);
+            button.setBounds((Frame.WIDTH - (answerButtons.length / 2) * width) / 2 + y * width, Frame.HEIGHT - x * MENU_BUTTON_HEIGHT - (Frame.WIDTH - (answerButtons.length / 2) * width) / 2, width, MENU_BUTTON_HEIGHT);
             button.setFocusPainted(false);
             this.add(button);
         }

@@ -11,9 +11,12 @@ public class Frame extends JFrame {
     public static final int HEIGHT = 600;
     public boolean isAlternian = false;
 
+    public static void main(String[] args) {
+        new Frame();
+    }
+
     public Frame() {
         this.setLocation(0, 0);
-        this.setTitle("A.B.C.");
         this.setResizable(false);
 
         contentPane = this.getContentPane();
@@ -36,26 +39,40 @@ public class Frame extends JFrame {
 
     public void changeLanguage() {
         this.isAlternian ^= true;
+        if (isAlternian) {
+            UIManager.put("OptionPane.messageFont", new Font("Alternian", Font.PLAIN, 14));
+            UIManager.put("OptionPane.buttonFont", new Font("Alternian", Font.PLAIN, 12));
+        } else {
+            UIManager.put("OptionPane.messageFont", UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.BOLD, 14));
+            UIManager.put("OptionPane.buttonFont", UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.PLAIN, 12));
+        }
     }
 
     public void openMenu() {
+        this.setTitle("A.B.C.");
         deletePanels();
         MenuPanel panel = new MenuPanel(this);
         contentPane.add(panel);
     }
 
     public void easyMode() {
+        this.setTitle("Press right button");
         deletePanels();
         EasyPanel panel = new EasyPanel(this);
         contentPane.add(panel);
     }
 
     public void mediumMode() {
-        hardMode();
+        this.setTitle("Press right keyboard key");
+        deletePanels();
+        MediumPanel panel = new MediumPanel(this);
+        contentPane.add(panel);
+        panel.setFocusable(true);
+        panel.requestFocus();
     }
 
     public void hardMode() {
-        JOptionPane.showMessageDialog(null, "In Development", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "In development", "", JOptionPane.ERROR_MESSAGE);
     }
 
     private void deletePanels() {
