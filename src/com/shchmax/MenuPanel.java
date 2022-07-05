@@ -50,8 +50,8 @@ public class MenuPanel extends JPanel {
     }
 
     private void reloadButtonsText() {
-        Font buttonAlternianFont = new Font("Hiveswapalternian", Font.PLAIN, 20);
-        Font buttonEnglishFont = new Font("Times New Roman", Font.PLAIN, 20);
+        Font buttonAlternianFont = new Font("Alternian", Font.PLAIN, 20);
+        Font buttonEnglishFont = UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.PLAIN, 18);
         if (!parentFrame.isAlternian) {
             languageSwitchButton.setFont(buttonEnglishFont);
             languageSwitchButton.setText("<html><center>Switch<br>Language</center></html>");

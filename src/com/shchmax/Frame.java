@@ -17,7 +17,7 @@ public class Frame extends JFrame {
         this.setResizable(false);
 
         contentPane = this.getContentPane();
-//        registerFonts();
+        registerFonts();
         openMenu();
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +28,7 @@ public class Frame extends JFrame {
     private void registerFonts() {
         GraphicsEnvironment gr = GraphicsEnvironment.getLocalGraphicsEnvironment();
         try {
-            gr.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/Hiveswapalternian.ttf")));
+            gr.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/Alternian.ttf")));
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
@@ -55,7 +55,7 @@ public class Frame extends JFrame {
     }
 
     public void hardMode() {
-        JOptionPane.showMessageDialog(null, "In Development.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "In Development", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     private void deletePanels() {

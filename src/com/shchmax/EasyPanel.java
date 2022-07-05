@@ -41,9 +41,9 @@ public class EasyPanel extends JPanel {
             }
         }
 
-        Font buttonAlternianFont = new Font("Hiveswapalternian", Font.PLAIN, 20);
-        Font buttonEnglishFont = new Font("Times New Roman", Font.PLAIN, 20);
-        Font labelAlternianFont = new Font("Hiveswapalternian", Font.PLAIN, Frame.HEIGHT / 6);
+        Font buttonAlternianFont = new Font("Alternian", Font.PLAIN, 20);
+        Font buttonEnglishFont = UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.PLAIN, 18);
+        Font labelAlternianFont = new Font("Alternian", Font.PLAIN, Frame.HEIGHT / 6);
         if (!parentFrame.isAlternian) {
             menuButton.setFont(buttonEnglishFont);
             menuButton.setText("Menu");
