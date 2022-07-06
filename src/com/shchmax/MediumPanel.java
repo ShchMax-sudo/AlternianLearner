@@ -6,8 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.security.SecureRandom;
 
-public class MediumPanel extends JPanel {
-    private final char letter;
+public class MediumPanel extends JPanel {    private final char letter;
 
     public MediumPanel(Frame parentFrame) {
         this.setBounds(0, 0, (int) (Frame.WIDTH * Frame.SCREEN_COEFFICIENT), (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT));

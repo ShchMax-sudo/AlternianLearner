@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AlternianLearner:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AlternianLearner_jar</output-path>
+    <root id="archive" name="AlternianLearner.jar">
+      <element id="module-output" name="AlternianLearner" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+    </root>
+  </artifact>
+</component>

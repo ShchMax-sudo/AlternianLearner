@@ -6,8 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
+import java.util.Objects;
 
 public class Frame extends JFrame {
     private final Container contentPane;
@@ -39,8 +38,9 @@ public class Frame extends JFrame {
     private void registerFonts() {
         GraphicsEnvironment gr = GraphicsEnvironment.getLocalGraphicsEnvironment();
         try {
-            gr.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("resources/fonts/Hiveswap Alternian.ttf")));
-        } catch (FontFormatException | IOException e) {
+            gr.registerFont(Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(Frame.class.getClassLoader().getResourceAsStream("Hiveswap_Alternian.ttf"))));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "", JOptionPane.WARNING_MESSAGE);
             e.printStackTrace();
         }
     }
