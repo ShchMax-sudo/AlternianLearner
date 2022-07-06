@@ -4,26 +4,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class MediumPanel extends JPanel {
     private final char letter;
 
     public MediumPanel(Frame parentFrame) {
-        this.setBounds(0, 0, Frame.WIDTH, Frame.HEIGHT);
-        this.setPreferredSize(new Dimension(Frame.WIDTH, Frame.HEIGHT));
+        this.setBounds(0, 0, (int) (Frame.WIDTH * Frame.SCREEN_COEFFICIENT), (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT));
+        this.setPreferredSize(new Dimension((int) (Frame.WIDTH * Frame.SCREEN_COEFFICIENT), (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT)));
         this.setLayout(null);
 
-        letter = (char)('a' + (char)(Math.abs((new Random()).nextInt()) % 26));
+        letter = (char)('a' + (char)(new SecureRandom().nextInt(26)));
 
         JButton menuButton = new JButton();
         JLabel questionLabel = new JLabel();
 
         menuButton.addActionListener(e -> parentFrame.openMenu());
 
-        Font buttonAlternianFont = new Font("Alternian", Font.PLAIN, 20);
-        Font buttonEnglishFont = UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.PLAIN, 18);
-        Font labelAlternianFont = new Font("Alternian", Font.PLAIN, Frame.HEIGHT / 6);
+        Font buttonAlternianFont = new Font("Alternian", Font.PLAIN, (int) (20 * Frame.SCREEN_COEFFICIENT));
+        Font buttonEnglishFont = UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.PLAIN, (float) (18 * Frame.SCREEN_COEFFICIENT));
+        Font labelAlternianFont = new Font("Alternian", Font.PLAIN, (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT / 6));
         if (!parentFrame.isAlternian) {
             menuButton.setFont(buttonEnglishFont);
         } else {
@@ -35,12 +35,12 @@ public class MediumPanel extends JPanel {
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
         questionLabel.setVerticalAlignment(JLabel.CENTER);
 
-        int MENU_BUTTON_WIDTH = 200;
-        int MENU_BUTTON_HEIGHT = 50;
+        final int MENU_BUTTON_WIDTH = (int) (200 * Frame.SCREEN_COEFFICIENT);
+        final int MENU_BUTTON_HEIGHT = (int) (50 * Frame.SCREEN_COEFFICIENT);
         menuButton.setBounds(0, 0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
         menuButton.setFocusPainted(false);
         this.add(menuButton);
-        questionLabel.setBounds(0, 0, Frame.WIDTH, Frame.HEIGHT);
+        questionLabel.setBounds(0, 0, (int) (Frame.WIDTH * Frame.SCREEN_COEFFICIENT), (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT));
         this.add(questionLabel);
 
         this.addKeyListener(new KeyListener() {

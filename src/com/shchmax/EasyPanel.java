@@ -2,15 +2,15 @@ package com.shchmax;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class EasyPanel extends JPanel {
     private final char[] letters = new char[6];
     private int correct;
 
     public EasyPanel(Frame parentFrame) {
-        this.setBounds(0, 0, Frame.WIDTH, Frame.HEIGHT);
-        this.setPreferredSize(new Dimension(Frame.WIDTH, Frame.HEIGHT));
+        this.setBounds(0, 0, (int) (Frame.WIDTH * Frame.SCREEN_COEFFICIENT), (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT));
+        this.setPreferredSize(new Dimension((int) (Frame.WIDTH * Frame.SCREEN_COEFFICIENT), (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT)));
         this.setLayout(null);
 
         generateLetters();
@@ -32,9 +32,9 @@ public class EasyPanel extends JPanel {
             }
         }
 
-        Font buttonAlternianFont = new Font("Alternian", Font.PLAIN, 20);
-        Font buttonEnglishFont = UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.PLAIN, 18);
-        Font labelAlternianFont = new Font("Alternian", Font.PLAIN, Frame.HEIGHT / 6);
+        Font buttonAlternianFont = new Font("Alternian", Font.PLAIN, (int) (20 * Frame.SCREEN_COEFFICIENT));
+        Font buttonEnglishFont = UIManager.getLookAndFeelDefaults().getFont("TextField.font").deriveFont(Font.PLAIN, (float) (18 * Frame.SCREEN_COEFFICIENT));
+        Font labelAlternianFont = new Font("Alternian", Font.PLAIN, (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT / 6));
         if (!parentFrame.isAlternian) {
             menuButton.setFont(buttonEnglishFont);
         } else {
@@ -51,8 +51,8 @@ public class EasyPanel extends JPanel {
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
         questionLabel.setVerticalAlignment(JLabel.CENTER);
 
-        int MENU_BUTTON_WIDTH = 200;
-        int MENU_BUTTON_HEIGHT = 50;
+        final int MENU_BUTTON_WIDTH = (int) (200 * Frame.SCREEN_COEFFICIENT);
+        final int MENU_BUTTON_HEIGHT = (int) (50 * Frame.SCREEN_COEFFICIENT);
         menuButton.setBounds(0, 0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
         menuButton.setFocusPainted(false);
         this.add(menuButton);
@@ -60,20 +60,21 @@ public class EasyPanel extends JPanel {
             JButton button = answerButtons[i];
             int x = i / (answerButtons.length / 2);
             int y = i % (answerButtons.length / 2);
-            int width = 200;
-            button.setBounds((Frame.WIDTH - (answerButtons.length / 2) * width) / 2 + y * width, Frame.HEIGHT - x * MENU_BUTTON_HEIGHT - (Frame.WIDTH - (answerButtons.length / 2) * width) / 2, width, MENU_BUTTON_HEIGHT);
+            final int BUTTON_WIDTH = (int) (200 * Frame.SCREEN_COEFFICIENT);
+            int cornerMargin = (int) ((Frame.WIDTH * Frame.SCREEN_COEFFICIENT - (answerButtons.length / 2) * BUTTON_WIDTH) / 2);
+            button.setBounds(cornerMargin + y * BUTTON_WIDTH, (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT - x * MENU_BUTTON_HEIGHT - cornerMargin), BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
             button.setFocusPainted(false);
             this.add(button);
         }
-        questionLabel.setBounds(0, 0, Frame.WIDTH, Frame.HEIGHT);
+        questionLabel.setBounds(0, 0, (int) (Frame.WIDTH * Frame.SCREEN_COEFFICIENT), (int) (Frame.HEIGHT * Frame.SCREEN_COEFFICIENT));
         this.add(questionLabel);
     }
 
     private void generateLetters() {
-        Random rand = new Random();
+        SecureRandom rand = new SecureRandom();
         for (int i = 0; i < letters.length;) {
             char ch = 'a';
-            ch += (char)(Math.abs(rand.nextInt()) % 26);
+            ch += (char)(rand.nextInt(26));
             boolean f = true;
             for (int j = 0; j < i; ++j) {
                 if (letters[j] == ch) {
@@ -86,6 +87,6 @@ public class EasyPanel extends JPanel {
                 i++;
             }
         }
-        correct = Math.abs(rand.nextInt()) % letters.length;
+        correct = rand.nextInt(letters.length);
     }
 }
